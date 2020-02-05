@@ -8,8 +8,8 @@ assert ['a', 'b', 'c'] == list(('a', 'b', 'c')) == list('abc')
 lst = list('welcome!')
 
 # все последовательности поддерживают слайсинг и доступ по индексу
-assert lst[0] == 'e'
-assert lst[1:3] == 'elc'
+assert lst[1] == 'e'
+assert lst[1:4] == ['e', 'l', 'c']
 assert lst[-1] == '!'
 
 # копирование списка/строки/кортежа (не рекурсивное)
@@ -23,21 +23,21 @@ assert lst.index('l') == 2
 
 # списки - изменяемые объекты, большинство их методов ничего не возвращают
 # а изменяют их состояние
-lst.append('!')
-assert lst == ['w', 'e', 'l', 'c', 'o', 'm', 'e', '!']
-assert ''.join(lst) == 'welcome!'
-
-lst.extend(['!', '!'])  # расширили исходный лист значениями другого листа
-assert ''.join(lst) == 'welcome!!!'
-
-assert lst.pop(len(lst) - 1) == '!'  # вытащили из списка последний элемент
+assert lst.append('!') is None
+assert lst == ['w', 'e', 'l', 'c', 'o', 'm', 'e', '!', '!']
 assert ''.join(lst) == 'welcome!!'
 
+lst.extend(['!', '!'])  # расширили исходный лист значениями другого листа
+assert ''.join(lst) == 'welcome!!!!'
+
+assert lst.pop(len(lst) - 1) == '!'  # вытащили из списка последний элемент
+assert ''.join(lst) == 'welcome!!!'
+
 lst.reverse()
-assert ''.join(lst) == '!!emoclew'
+assert ''.join(lst) == '!!!emoclew'
 
 lst.remove('!')  # удаляем первый такой элемент в списке. Если не найдет - выбросит исключение
-assert ''.join(lst) == '!emoclew'
+assert ''.join(lst) == '!!emoclew'
 
 #
 # Кортежи
@@ -55,11 +55,13 @@ assert t1 == t2
 #
 # Именованные кортежи
 #
+
 from collections import namedtuple
 
-User = namedtuple('User', ('login', 'email'))
+u = namedtuple('User', ('login', 'email'))
 
-petya = User('petya_xXx', 'petr666@mail.ru')
+petya = u(login='petya_xXx', email='petr666@mail.ru')
 
 assert petya.login == petya[0] == 'petya_xXx'
 assert petya.email == petya[1] == 'petr666@mail.ru'
+petya.asd = 1

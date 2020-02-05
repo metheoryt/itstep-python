@@ -11,13 +11,14 @@ assert d == {'foo': 'bar', 'spam': 'egg'}
 assert d['foo'] == 'bar'
 assert d['spam'] == 'egg'
 
+
+# запись значений в существующий словарь
+d['lol'] = 'tea'
+
 try:
     d['nothing'] = d['nothing']
 except KeyError:
     print('ключа nothing нет в словаре')
-
-# запись значений в существующий словарь
-d['lol'] = 'tea'
 
 # безопасный доступ к элементам
 assert d.get('nothing') is None
@@ -39,13 +40,13 @@ from collections import defaultdict
 
 loldict = defaultdict(lambda: 'lol')
 
-assert loldict['foo'] == 'bar'
+assert loldict['foo'] == 'lol'
 assert loldict['nothing'] == 'lol'
 assert loldict[1] == 'lol'
 assert loldict[None] == 'lol'
 
 listdict = defaultdict(list)
 
-loldict['great'].append(1)
-assert loldict['great'] == [1]
-assert loldict['python'] == []
+listdict['great'].append(1)
+assert listdict['great'] == [1]
+assert listdict['python'] == []
