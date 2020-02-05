@@ -21,6 +21,11 @@ result = multiply(2, multiply(3, 3))
 assert result == 18
 
 
+# безымянная однострочная lambda-функция
+mul = lambda a, b: a * b  # эта функция равнозначна multiply
+assert mul(2, 3) == 6
+
+
 # аргументам могут быть назначены значения по умолчанию
 def greet(name='гость'):
     return f'привет, {name}!'
