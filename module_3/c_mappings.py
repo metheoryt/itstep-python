@@ -26,13 +26,17 @@ assert d.get('nothing', 'something') == 'something'
 
 
 for k in d:
-    print(k, end=', ')  # foo, spam, lol (но необязательно в этом порядке)
+    print(k, end=', ')  # foo, spam, lol, (но необязательно в этом порядке)
+
+print()  # для переноса строки
 
 for k in d.values():
-    print(k, end=', ')  # bar, egg, tea  (но необязательно в этом порядке)
+    print(k, end=', ')  # bar, egg, tea,  (но необязательно в этом порядке)
+
+print()
 
 for k, v in d.items():
-    print(k, '-', v, end=', ')  # foo - bar, spam - egg, lol - tea
+    print(k, '-', v, end=', ')  # foo - bar, spam - egg, lol - tea,
 
 
 # defaultdict - словарь с дефолтными значениями несуществующих ключей
