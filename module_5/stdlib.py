@@ -28,7 +28,7 @@ import cgi, urllib, smtplib, poplib, telnetlib, socket, asyncore
 import socketserver, http, xmlrpc, asynchat
 
 # XML
-import xml
+import xml  # defusedxml@pypi как безопасная альтернатива
 
 
 # Другие
