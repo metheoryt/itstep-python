@@ -22,15 +22,7 @@ print(employee.annualSalary())
 
 
 # агрегация
-class Salary2(object):
-    def __init__(self, pay):
-        self.pay = pay
-
-    def getTotal(self):
-        return (self.pay * 12)
-
-
-class Employee2(object):
+class Employee2:
     def __init__(self, pay, bonus):
         self.pay = pay
         self.bonus = bonus
@@ -39,5 +31,6 @@ class Employee2(object):
         return "Total: " + str(self.pay.getTotal() + self.bonus)
 
 
-employee2 = Employee2(100, 10)
-print(employee.annualSalary())
+salary = Salary(100)
+employee2 = Employee2(salary, 10)
+print(employee2.annualSalary())

@@ -36,15 +36,13 @@ class MyClass:
 
     def __init__(self, public, protected):
         self.public = public  # атрибут объекта
-        self.public_class = public  # в конструкторе объекта можно перезаписывать атрибуты класса
         self._protected = protected
-        self._protected_class = protected
         self.__private = 'secret'
 
     # getter/setter свойства объекта
     @property
     def private_prop(self):
-        return f'{self.__private}'
+        return self.__private
 
     @private_prop.setter
     def private_prop(self, value):
@@ -80,31 +78,47 @@ MyClass.print_class_attrs()
 
 o = MyClass(public='lol', protected='bar')
 
-o.print_class_attrs()
+# эти два вызова равнозначны
 o.print_object_attrs()
+MyClass.print_object_attrs(o)
+
 
 o.private_prop = 'password'
-print(o.private_prop)
+print(o.private_prop)  # secret password
+
 
 # можно обращатья к защищённым атрибутам напрямую, но это нежелательно
 print(o._protected)
 print(o.__private)  # ошибка
 print(o._MyClass__private)  # приватный атрибут хранится здесь, но так делать не стоит
 
-# с классом то же самое
+
+# с атрибутами класса то же самое
 print(MyClass._protected_class)
 print(MyClass.__private_class)  # ошибка
 print(MyClass._MyClass__private_class)
 
 
 # динамическое присваивание метода классу
-def dynamic_method(obj, x):
-    print(f'obj.public is {obj.public} and x is {x}')
+def dynamic_method(obj=None):
+    if obj is not None:
+        print(obj.foo)
+    else:
+        print('static')
 
 
-MyClass.method = dynamic_method
+class Dummy:
+    foo = '42'
 
-o.method(1)
+
+dum = Dummy()
+
+
+Dummy.method = dynamic_method
+
+dum.method()  # 42
+Dummy.method(dum)  # 42
+Dummy.method()  # static
 
 
 #
@@ -131,9 +145,17 @@ class John(Spam, Egg):
         print('foo from John')
 
 
+class Alice(Spam, Egg): pass
+
+
+class Bob(Egg, Spam): pass
+
+
 john = John()
 
-john.spam()
-john.egg()
+john.spam()  # the spam
+john.egg()  # the egg
 
-john.foo()  # ?
+john.foo()  # foo from John
+Alice().foo()  # foo from Spam
+Bob().foo()  # foo from Egg
