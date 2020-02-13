@@ -8,6 +8,12 @@ https://habr.com/ru/post/320288
 doubles = [v*2 for v in range(5)]
 print(doubles)
 
+# аналогичная запись
+l = []
+for i in range(5):
+    l.append(i*2)
+
+
 # генератор словаря (dictionary comprehension)
 the_names = {x: f'The {x}' for x in ['Simon', 'John', 'Alice']}
 print(the_names)

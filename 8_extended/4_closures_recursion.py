@@ -14,7 +14,10 @@ def generate_power(power):  # функция-фабрика
 
 pow_2 = generate_power(2)
 pow_3 = generate_power(3)
+
 print(pow_2(5))  # 5**2
+print(generate_power(2)(5))  # 5**2
+
 print(pow_3(4))  # 4**3
 
 
@@ -42,36 +45,36 @@ d = {
 print(d)
 print('общее количество ключей словаря d: ', walk_dict(d))
 
-# делаем "ВНИМАНИЕ" рекурсивный словарь - словарь, содержащий в одном из ключей ссылку на самого себя
+# делаем ВНИМАНИЕ рекурсивный словарь - словарь, содержащий в одном из ключей ссылку на самого себя
 d['d'] = d
-
 print(d)
 
+
 # рекурсивная функция с замыканием
-def walk_dict_new(d, max_depth=5):
+def walk_dict_new(dictionary, max_depth=5):
     """считает общее количество ключей в словаре, включая вложенные словари.
     если словарь глубже чем максимальная глубина вложенности max_depth - выбросится исключение"""
 
     current_depth = 0
 
-    def inner_walk(_d):
+    def inner_walk(_dict):
         nonlocal current_depth
         current_depth += 1
 
-        keys_count = len(d.keys())
+        keys_count = len(_dict.keys())
 
         if current_depth > max_depth:
             current_depth -= 1
             return keys_count
 
-        for v in d.values():
+        for v in _dict.values():
             if isinstance(v, dict):
                 keys_count += inner_walk(v)
 
         current_depth -= 1
         return keys_count
 
-    return inner_walk(d)
+    return inner_walk(dictionary)
 
 
 print('количество ключей рекурсивного словаря d с глубиной в 5 уровней:', walk_dict_new(d, max_depth=5))
