@@ -1,0 +1,2 @@
+валидные домены: d-9.1foo-bar2.lolipop, ftp://d-9.1foo-bar2.lolipop/index.php, a.b1.co, LOL1.FOO-bar.COM.
+невалидные домены: a_..cert.kz, ab-.domain.com, ab.do-.com, ab.do.com-, ab.d--o.com , four.level.domain.name,
