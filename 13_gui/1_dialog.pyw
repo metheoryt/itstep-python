@@ -28,7 +28,7 @@ class MainWindow(tkinter.Frame):
                                     orient=tkinter.HORIZONTAL)
         amount_label = tkinter.Label(self, text="Amount $",
                                      anchor=tkinter.W)
-        actual_amount_label = tkinter.Label(self, textvariable=self.amount, relief=tkinter.SUNKEN,
+        actual_amount_label = tkinter.Label(self, textvariable=self.amount, relief=tkinter.GROOVE,
                                             anchor=tkinter.E)
 
         principal_label.grid(row=0, column=0, padx=2, pady=2, sticky=tkinter.W)
@@ -39,6 +39,15 @@ class MainWindow(tkinter.Frame):
         years_scale.grid(row=2, column=1, padx=2, pady=2, sticky=tkinter.EW)
         amount_label.grid(row=3, column=0, padx=2, pady=2, sticky=tkinter.W)
         actual_amount_label.grid(row=3, column=1, padx=2, pady=2, sticky=tkinter.EW)
+
+        # principal_label.pack()
+        # principal_scale.pack()
+        # rate_label.pack()
+        # rate_scale.pack()
+        # years_label.pack()
+        # years_scale.pack()
+        # amount_label.pack()
+        # actual_amount_label.pack()
 
         principal_scale.focus_set()
         self.updateUi()
@@ -53,9 +62,14 @@ class MainWindow(tkinter.Frame):
                 (1 + (self.rate.get() / 100.0)) ** self.years.get())
 
         self.amount.set("{0:.2f}".format(amount))
+        self.master.title("{0:.2f}".format(amount))
 
     def quit(self, event=None):
+        print('bye!')
         self.master.destroy()
+
+    def on_focus(self, *args):
+        print('taken focus:', args)
 
 
 if __name__ == '__main__':
